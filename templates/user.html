@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} {{user.username}} {% endblock %}
+{% block content %}
+
+<h2>Welcome {{user.first_name}}</h2>
+
+{% for msg in get_flashed_messages() %}
+<div class="alert">{{msg}}</div>
+{% endfor %}
+
+{% for msg in get_flashed_messages() %}
+<div class="alert">{{msg}}</div>
+{% endfor %}
+
+<h3>User Information:</h3>
+<ul>
+    <li>First Name: {{user.first_name}}</li>
+    <li>Last Name: {{user.last_name}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>Username: {{user.username}}</li>
+</ul>
+
+<h4>User Feedback</h4>
+<ul>
+    {% for comment in feedback %}
+    <li>Title: {{comment.title}}</li>
+    <p>Content: {{comment.content}}</p>
+    {% if session['username'] == comment.username %}
+    <button><a href="feedback/{{comment.id}}/update">Edit</a></button>
+    <form action='/users/feedback/{{comment.id}}/delete' method="POST">
+        <button>
+            Delete
+        </button>
+    </form>
+    {% endif %}
+    {% endfor %}
+</ul>
+<button><a href="/users/{{user.username}}/feedback/add">Add Feedback</a></button>
+<br>
+<button><a href="/logout">Logout</a></button>
+<br>
+<button><a href="/users/{{user.username}}/delete">Delete User</a></button>
+
+{% endblock %}
