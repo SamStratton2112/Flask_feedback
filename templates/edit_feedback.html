@@ -7,7 +7,7 @@
 <div class="alert">{{msg}}</div>
 {% endfor %}
 
-<form methods="POST" >
+<form method="POST" >
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden'%}
     <p>

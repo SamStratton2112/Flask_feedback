@@ -3,9 +3,9 @@
 {% block content %}
 <h1>Add a new comment below:</h1>
 
-{% for msg in get_flashed_messages() %}
+<!-- {% for msg in get_flashed_messages() %}
 <div class="alert">{{msg}}</div>
-{% endfor %}
+{% endfor %} -->
 
 <form method="POST">
     {{form.hidden_tag()}}

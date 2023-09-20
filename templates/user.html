@@ -8,10 +8,6 @@
 <div class="alert">{{msg}}</div>
 {% endfor %}
 
-{% for msg in get_flashed_messages() %}
-<div class="alert">{{msg}}</div>
-{% endfor %}
-
 <h3>User Information:</h3>
 <ul>
     <li>First Name: {{user.first_name}}</li>
@@ -35,10 +31,11 @@
     {% endif %}
     {% endfor %}
 </ul>
+{% if session['username'] == user.username %}
 <button><a href="/users/{{user.username}}/feedback/add">Add Feedback</a></button>
 <br>
 <button><a href="/logout">Logout</a></button>
 <br>
 <button><a href="/users/{{user.username}}/delete">Delete User</a></button>
-
+{% endif %}
 {% endblock %}

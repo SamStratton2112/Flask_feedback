@@ -79,7 +79,7 @@ def show_add_feedback_form(username):
     user = User.query.filter_by(username=username).first()
     if form.validate_on_submit():
         if session['username'] != user.username:
-            flash(f'You can only add feedback for {user.username}')
+            flash(f'You can only add feedback for your account!')
             return redirect(f'/users/{user.username}')
         else:
             title = form.title.data
@@ -110,9 +110,6 @@ def edit_feedback_form(id):
         comment.title = form.title.data
         comment.content = form.content.data
         db.session.commit()
-        print('***************************')
-        print(comment)
-        print('***************************')
         return redirect(f'/users/{comment.username}')
     return render_template('edit_feedback.html', form=form, comment=comment)
 
@@ -124,23 +121,3 @@ def delete_feedback(id):
     db.session.commit()
     return redirect(f'/users/{username}')    
 
-
-
-
-
-# @app.route('/users/feedback/<int:id>/update', methods=['GET','POST'])
-# def edit_feedback_form(id):
-#     """show edit feedback form and handle updates to feedback"""
-#     comment = Feedback.query.get_or_404(id)
-#     form = EditFeedbackForm(obj=comment)
-#     if session['username'] == comment.username:
-#         flash('Only the user who created the post can edit the post!')
-#         return redirect(f'/users/{comment.username}')
-#     else:
-#         if form.validate_on_submit():
-#             comment.title = form.title.data
-#             comment.content = form.content.data
-#             db.session.commit()
-#             return redirect(f'/users/{comment.username}')
-#         else:
-#             return render_template('edit_feedback.html', form=form, comment=comment)
